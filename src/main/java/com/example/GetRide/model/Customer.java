@@ -3,10 +3,10 @@ package com.example.GetRide.model;
 
 import com.example.GetRide.Enum.Gender;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,6 +14,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "customer")
+@Builder
 public class Customer {
 
     @Id
@@ -29,4 +30,7 @@ public class Customer {
 
     @Enumerated(EnumType.STRING) //otherwise it will ordinal in db
     private Gender gender;
+
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private List<Booking> booking = new ArrayList<>();
 }

@@ -2,10 +2,8 @@ package com.example.GetRide.model;
 
 import com.example.GetRide.Enum.BookingStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
@@ -16,26 +14,35 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "booking")
+@FieldDefaults(level = AccessLevel.PRIVATE)   //make all variables private has less priority
 public class Booking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    int id;
 
-    private String bookingId;
+    String bookingId;
 
-    private String pickup;
+    String pickup;
 
-    private String destination;
+    String destination;
 
     @Enumerated(EnumType.STRING)
-    private BookingStatus bookingStatus;
+    BookingStatus bookingStatus;
 
-    private double totalDistance;
+    double totalDistance;
 
-    private double totalFare;
+    double totalFare;
 
     @CreationTimestamp
-    private Date bookedAt; // util - date and time sql - time
+    Date bookedAt; // util - date and time sql - time
+
+    @ManyToOne
+    @JoinColumn
+    Customer customer;
+
+    @ManyToOne
+    @JoinColumn
+    Driver driver;
 
 }

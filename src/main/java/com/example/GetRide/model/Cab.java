@@ -27,4 +27,8 @@ public class Cab {
     private double farePerKm;
 
     private boolean booked;
+
+    @OneToOne
+    @JoinColumn
+    private Driver driver;
 }

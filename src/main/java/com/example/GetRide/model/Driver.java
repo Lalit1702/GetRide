@@ -1,10 +1,11 @@
 package com.example.GetRide.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,20 +13,27 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "driver")
+@FieldDefaults(level = AccessLevel.PRIVATE)   //make all variables private has less priority
 public class Driver {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    int id;
 
     @Column(name = "driver_name")
-    private String name;
+    String name;
 
-    private int age;
-
-    @Column(unique = true,nullable = false)
-    private String drivingLicense;
+    int age;
 
     @Column(unique = true,nullable = false)
-    private long mobileNo;
+    String drivingLicense;
+
+    @Column(unique = true,nullable = false)
+    long mobileNo;
+
+    @OneToOne(mappedBy = "driver",cascade = CascadeType.ALL)
+    Cab cab;
+
+    @OneToMany(mappedBy = "driver",cascade = CascadeType.ALL)
+    List<Booking> booking = new ArrayList<>();
 }
