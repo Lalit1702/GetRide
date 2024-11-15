@@ -1,11 +1,9 @@
 package com.example.GetRide.model;
 
 import com.example.GetRide.Enum.CabType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,6 +11,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "cab")
+@Builder
 public class Cab {
 
     @Id
@@ -30,5 +29,6 @@ public class Cab {
 
     @OneToOne
     @JoinColumn
+    @JsonIgnore
     private Driver driver;
 }
