@@ -10,6 +10,9 @@ import com.example.GetRide.repository.DriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class DriverService {
 
@@ -36,4 +39,22 @@ public class DriverService {
     }
 
 
+    public List<DriverResponse> getDriverAboveAge(int age) {
+        List<Driver> drivers =  driverRepository.getDriverAboveAge(age);
+        List<DriverResponse> driverResponses = new ArrayList<>();
+        for(Driver driver:drivers){
+            driverResponses.add(DriverTransformer.driverToDriverResponse(driver));
+        }
+        return driverResponses;
+    }
+
+    public String updateDriverLicense(String driverLicense, long mobileNO) {
+        driverRepository.updateDriverLicense(driverLicense,mobileNO);
+        return "Driving License Number of Driver has been Updated";
+    }
+
+    public String updateDriverMobNo(long newMobNo, long oldMobNo) {
+        driverRepository.updateDriverMobNo(newMobNo,oldMobNo);
+        return "Mobile Number of Driver Has Been Updated Successfully";
+    }
 }
