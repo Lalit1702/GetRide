@@ -14,7 +14,8 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "booking")
-@FieldDefaults(level = AccessLevel.PRIVATE)   //make all variables private has less priority
+@FieldDefaults(level = AccessLevel.PRIVATE) //make all variables private has less priority
+@Builder
 public class Booking {
 
     @Id
